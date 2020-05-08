@@ -30,5 +30,5 @@
 // };
 
 module.exports = {
-    publicPath: process.env.NODE_ENV === 'production' ? '/jenkins' : '/'
-}
+  publicPath: process.env.NODE_ENV === "production" ? "/jenkins" : "/"
+};
