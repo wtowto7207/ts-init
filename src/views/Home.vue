@@ -1,6 +1,7 @@
 <template>
   <div class="home">
     <van-button @click="jump">跳转</van-button>
+    <van-button @click="jumpA">跳转页面A</van-button>
   </div>
 </template>
 
@@ -20,6 +21,16 @@ export default class Home extends Vue {
     this.$router.push({
       name: "RedPocket"
     });
+  }
+  private jumpA() {
+    this.$router.push({
+      name: "A"
+    });
+  }
+  beforeRouteLeave(to: any, from: any, next: any) {
+    console.log(to.meta.keepAlive);
+    to.meta.keepAlive = false;
+    next();
   }
 }
 </script>

@@ -9,7 +9,10 @@ const routes: Array<RouteConfig> = [
   {
     path: "/",
     name: "Home",
-    component: Home
+    component: Home,
+    meta: {
+      keepAlive: false
+    }
   },
   {
     path: "/about",
@@ -24,12 +27,37 @@ const routes: Array<RouteConfig> = [
     path: "/redPocket",
     name: "RedPocket",
     component: RedPocket
+  },
+  //keepAlive动态缓存
+  //
+  {
+    path: "/page/a",
+    name: "A",
+    component: () => import("../views/KeepAlive/PageA.vue"),
+    meta: {
+      keepAlive: true
+    }
+  },
+  {
+    path: "/page/b",
+    name: "B",
+    component: () => import("../views/KeepAlive/PageB.vue"),
+    meta: {
+      KeepAlive: false
+    }
   }
 ];
 
 const router = new VueRouter({
   mode: "history",
   base: process.env.BASE_URL,
+  scrollBehavior (to, from, savedPosition) {
+    if (savedPosition) {
+      return savedPosition
+    } else {
+      return { x: 0, y: 0 }
+    }
+  },
   routes
 });
 
